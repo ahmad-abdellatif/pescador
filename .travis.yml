@@ -7,13 +7,46 @@ cache:
 notifications:
   email: false
 
-python:
-    - "2.7"
-    - "3.4"
-    - "3.5"
-    - "3.6"
-    - "3.7"
-    - "3.8"
+matrix:
+  include:
+  - dist: xenial
+    os: linux
+    language: python
+    python: "3.5"
+  - dist: xenial
+    os: linux
+    language: python
+    python: "3.6"
+  - dist: xenial
+    os: linux
+    language: python
+    python: "3.8"
+  
+  - dist: trusty
+    os: linux
+    language: python
+    python: "3.5"
+  - dist: trusty
+    os: linux
+    language: python
+    python: "3.6"
+  - dist: trusty
+    os: linux
+    language: python
+    python: "3.8"
+    
+  - dist: bionic
+    os: linux
+    language: python
+    python: "3.5"
+  - dist: bionic
+    os: linux
+    language: python
+    python: "3.6"
+  - dist: bionic
+    os: linux
+    language: python
+    python: "3.8"
 
 before_install:
     - bash .travis_dependencies.sh
@@ -27,6 +60,7 @@ install:
 
 script:
     - pytest
+    - python examples/zmq_example.py
 
 after_success:
     - coveralls
